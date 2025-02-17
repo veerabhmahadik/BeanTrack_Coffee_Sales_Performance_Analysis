@@ -37,6 +37,7 @@ The **Coffee Shop Sales** Power BI dashboard provides a **comprehensive analysis
    - Changing data types (e.g., dates, currency).
    - Creating new calculated columns (if needed).
 3. Click **"Close & Apply"** to save changes.
+4. Click on 'Model View' and establish a one-to-many relationship between Transactions and Date Table by connecting the 'Date' column from the Date Table to 'transaction_date' in Transactions tables.
 
 ---
 
