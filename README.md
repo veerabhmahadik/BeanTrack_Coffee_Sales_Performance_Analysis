@@ -32,10 +32,7 @@ The **Coffee Shop Sales** Power BI dashboard provides a **comprehensive analysis
 
 ### **Step 3: Transform Data using Power Query**
 1. Click **"Transform Data"** to open **Power Query Editor**.
-2. Apply necessary transformations such as:
-   - Removing duplicates.
-   - Changing data types (e.g., dates, currency).
-   - Creating new calculated columns (if needed).
+2. Refer to Transaction_Table_New_Measures and Data_Table_DAX files for new measures and calculated columns
 3. Click **"Close & Apply"** to save changes.
 
 ---
