@@ -1,0 +1,57 @@
+ID,TableID,Name,Expression
+1798,12,Total Sales,sum(Transactions[Sales])
+1897,12,Current_Month_Sales,"VAR selected_month = SELECTEDVALUE('Date Table'[Month])
+                        RETURN
+                        TOTALMTD(CALCULATE([Total Sales], 'Date Table'[Month] = selected_month), 'Date Table'[Date])"
+1900,12,Previous_Month_Sales,"CALCULATE([Current_Month_Sales], DATEADD('Date Table'[Date], -1, MONTH))"
+1903,12,MoM_Growth_&_Diff_Sales,"
+    VAR month_diff = [Current_Month_Sales] - [Previous_Month_Sales]
+    VAR mom = IF(NOT(ISBLANK([Previous_Month_Sales]) && [Previous_Month_Sales] <> 0), month_diff / [Previous_Month_Sales], BLANK())
+    VAR _sign = IF(month_diff > 0, ""+"", """")
+    VAR _sign_trend = IF(month_diff > 0, ""_"", ""_"")
+    RETURN 
+    IF(
+        ISBLANK([Previous_Month_Sales]) || [Previous_Month_Sales] = 0,
+        ""No Previous sales"",
+        _sign_trend & "" "" & _sign & FORMAT(mom, ""#0.0%"") & "" | "" & _sign & FORMAT(month_diff / 1000, ""0.0K"") & "" vs LM""
+        )
+
+    "
+1905,12,Total Orders,DISTINCTCOUNT(Transactions[transaction_id])
+1907,12,Current_Month_Orders,"VAR selected_month = SELECTEDVALUE('Date Table'[Month])
+                        RETURN
+                        TOTALMTD(CALCULATE([Total Orders], 'Date Table'[Month] = selected_month), 'Date Table'[Date])"
+1909,12,Previous_Month_Orders,"CALCULATE([Current_Month_Orders], DATEADD('Date Table'[Date], -1, MONTH))"
+1911,12,MoM_Growth_&_Diff_Orders,"
+
+    VAR month_diff = [Current_Month_Orders] - [Previous_Month_Orders]
+    VAR mom = ([Current_Month_Orders] - [Previous_Month_Orders])/ [Previous_Month_Orders]
+    VAR _sign = IF(month_diff > 0, ""+"", """")
+    VAR _sign_trend = IF(month_diff > 0, ""▲"", ""▼"")
+    RETURN _sign_trend & "" "" & _sign & FORMAT(mom, ""#0.0%"" & "" | "" & _sign & FORMAT(month_diff/1000, ""0.0K"")) & "" "" & ""vs LM"""
+1913,12,Total Quantity Sold,SUM(Transactions[transaction_qty])
+1917,12,Current_Month_Quantity,"VAR selected_month = SELECTEDVALUE('Date Table'[Month])
+                        RETURN
+                        TOTALMTD(CALCULATE([Total Quantity Sold], 'Date Table'[Month] = selected_month), 'Date Table'[Date])"
+1919,12,Previous_Month_Quantity,"CALCULATE([Current_Month_Quantity], DATEADD('Date Table'[Date], -1, MONTH))"
+1921,12,MoM_Growth_&_Diff_Quantity,"
+
+    VAR month_diff = [Current_Month_Quantity] - [Previous_Month_Quantity]
+    VAR mom = ([Current_Month_Quantity] - [Previous_Month_Quantity])/ [Previous_Month_Quantity]
+    VAR _sign = IF(month_diff > 0, ""+"", """")
+    VAR _sign_trend = IF(month_diff > 0, ""▲"", ""▼"")
+    RETURN _sign_trend & "" "" & _sign & FORMAT(mom, ""#0.0%"" & "" | "" & _sign & FORMAT(month_diff/1000, ""0.0K"")) & "" "" & ""vs LM"""
+2153,12,Foot_Note,"""Hover on this visual to see details"""
+3305,12,Placeholder,Placeholder = 0
+3307,12,Label for store location,"SELECTEDVALUE(Transactions[store_location]) & "" | "" & FORMAT([Total Sales]/1000, ""$0.00K"")"
+3309,12,Daily Avg Sales,"AVERAGEX(ALLSELECTED(Transactions[transaction_date]), [Total Sales])"
+3312,12,Bar Colors,"IF([Total Sales] > [Daily Avg Sales], ""Above Average"", ""Below Average"")"
+3314,12,Label for product category,"SELECTEDVALUE(Transactions[product_category]) & "" | "" & FORMAT([Total Sales]/1000, ""$0.00K"")"
+3316,12,New MoM Label,"
+    VAR month_diff = [Current_Month_Sales] - [Previous_Month_Sales]
+    VAR mom = ([Current_Month_Sales] - [Previous_Month_Sales])/ [Previous_Month_Sales]
+    VAR _sign = IF(month_diff > 0, ""+"", """")
+    VAR _sign_trend = IF(month_diff > 0, ""▲"", ""▼"")
+    RETURN _sign_trend & "" "" & _sign & FORMAT(mom, ""#0.0%"")  "
+3318,12,Label for product type,"SELECTEDVALUE(Transactions[product_type]) & "" | "" & FORMAT([Total Sales]/1000, ""$0.00K"")"
+3374,12,TT for Hour,"""Hour No:"" & "" "" & FORMAT(AVERAGE(Transactions[Hour]), 0)"
