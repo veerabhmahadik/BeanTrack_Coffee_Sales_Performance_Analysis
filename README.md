@@ -1,7 +1,7 @@
-# ☕ Coffee Shop Sales
+# ☕ BeanTrack_Coffee_Sales_Performance_Analysis
 
 ## 📌 Project Overview
-The **Coffee Shop Sales** Power BI dashboard provides a **comprehensive analysis of sales performance** across different store locations, time periods, and product categories. This dashboard enables data-driven decision-making by identifying **sales trends, peak selling hours, top-performing products, and location-based performance variations**. 
+The BeanTrack: Coffee_Sales_Performance_Analysis Power BI dashboard comprehensively analyzes sales performance across different store locations, time periods, and product categories. It enables data-driven decision-making by identifying sales trends, peak selling hours, top-performing products, and location-based performance variations. 
 
 ## 🎯 Objectives
 - **Total Sales Analysis:** Track sales figures, month-over-month changes, and revenue trends.
